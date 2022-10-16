@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap");
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #FAFAF7;
+    overflow-x: hidden ;
+}
+
+h1{
+    letter-spacing: 5px;
+}
+
+textarea {
+    resize: none;
+  }
+
+
+
+.btn-rounded{
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(249, 206, 117);
+    color: #4D4D4C !important;
+    padding: 0.5rem 1.5rem;
+    margin: auto;
+}
+
+.btn-rounded:hover{
+    background-color: rgb(255, 204, 65) !important;
+    transition: 0.5s;
+}
+
+.banner.image {
+    background-size: contain;
+}
+
+.bg-nav{
+
+    border-radius: 20px;
+    background-color: rgb(250, 206, 117) ;
+}
+.bg-nav:hover{
+    background-color: rgb(255, 204, 65);
+    transition: 0.5s;
+    color: #4D4D4C !important;
+
+}
+.nav-item .round-border{
+    border: 3px solid;
+    border-radius: 25px;
+    border-color: rgb(249, 206, 117) !important;
+}
+
+.round-border:hover{
+    background-color: rgb(249, 206, 117);
+    color: grey !important;
+
+}
+
+.carousel .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: rgb(249, 206, 117);
+ }
+
+.head-col{
+    color: #4D4D4C;
+}
+
+.sub{
+    color: #C7CB9B;
+    letter-spacing: 3px;
+}
+
+.sub-two{
+    color: #4D4D4C;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+.menu-img1{
+    background-image: url(public/img/lowerSection1.jpg);
+    /*background-image: url(/img/lowerSection1.jpg) ;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+footer , .menu-con{
+    background-color: #F0F0E6;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.col-green{
+    color: #4F5E3F !important;
+}
+
+.col-text{
+    color: #4D4D4C !important;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+.nav-in{
+    transition: all 0.4s ease-in-out;
+}
+
+.nav-in{
+    transition: all 0.3s eas;
+}
+
+.shrink {
+    font-size: medium  !important;
+
+}
+
+.card{
+    border: none;
+    background-color: initial;
+}
+
+.menu-img{
+
+
+    overflow: hidden;
+    /* margin: 0 0; */
+
+}
+
+.menu-img img {
+    height: 100%;
+    width: 100%;
+    transition: 0.5s all ease-in-out;
+}
+
+.menu-img:hover img {
+    transform: scale(1.12);
+}
+
+@media only screen and (min-width: 1376px) {
+    .carousel-item{
+        height: 100vh;
+    }
+  }
+

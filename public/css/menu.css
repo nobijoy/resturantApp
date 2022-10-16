@@ -1,0 +1,66 @@
+
+
+.body-bg{
+    background-color: #FAFAF7 !important;
+}
+
+.bg-container{
+    background-color: #F0F0E6;
+}
+
+.btn-menu{
+    border: none;
+    border-radius: 20px !important;
+    background-color: #F0F0E6 !important;
+    color: #4D4D4C !important;
+    padding: 0.5rem 1.5rem;
+    letter-spacing: 2px;
+    margin: auto;
+}
+
+.btn-menu:hover{
+    background-color: #E5D1B7 !important;
+    transition: 0.5s;
+}
+
+.no-mb{
+    margin-bottom: 0;
+}
+
+.active{
+    background-color: rgb(249, 206, 117) !important;
+}
+
+.h1-title{
+    font-size: 55px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: #4D4D4C;
+}
+
+.text-grey{
+    color: #4D4D4C;
+}
+
+.menu-item{
+    font-size: 1rem;
+    color: #4D4D4C !important;
+    font-weight: 600;
+    letter-spacing: .08em;
+}
+
+@media only screen and (max-width: 768px) {
+    .h1-title{
+        font-size: 24px;
+    }
+  }
+
+
+@media only screen and (max-width: 576px) {
+    .btn-menu{
+    font-size: small;
+    padding: 0.5rem;
+    letter-spacing: normal;
+    margin: 3px;
+    }
+}
