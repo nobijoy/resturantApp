@@ -42,7 +42,7 @@
                     <a class="nav-link text-white" href="{{route('menus')}}">MENUS</a>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link text-white" href="{{route('restaurant')}}">RESTURANT</a>
+                    <a class="nav-link text-white" href="{{route('restaurantList')}}">RESTURANT</a>
                 </li>
                 <li class="nav-item px-3">
                     <a class="nav-link text-white" href="{{route('about')}}">ABOUT</a>

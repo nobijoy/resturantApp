@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        view()->composer('*',function($settings){
+            $settings->with('url', Route::currentRouteName());
+
+            if (!session()->has('popup'))
+            {
+                view()->share('visit', 1);
+            }
+            session()->put('popup' , 1);
+        });
+        // Schema::defaultStringLength(191);
     }
 }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Restaurant extends Model
+class Parking extends Model
 {
     use HasFactory;
 
-    public function area(){
-        return $this->belongsTo(Area::class, 'area_id', 'id');
+    public function restaurant(){
+        return $this->belongsTo(Restaurant::class, 'restaurant_id', 'id');
     }
 }
