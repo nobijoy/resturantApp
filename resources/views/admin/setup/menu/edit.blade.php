@@ -1,7 +1,7 @@
 @extends('master.admin.master')
 
 @section('title')
-Add New Restaurant
+Edit Menu Info
 @endsection
 
 @section('body')
@@ -10,7 +10,7 @@ Add New Restaurant
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-1">
             <h3 class="content-header-title">
-                <a href="{{ route ('restaurant.index')}}" class="btn btn-primary">Restaurant List<i class="fa fa-eye"></i></a>
+                <a href="{{ route ('menu.index')}}" class="btn btn-primary">Menu List<i class="fa fa-eye"></i></a>
             </h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -18,9 +18,9 @@ Add New Restaurant
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Restaurant</a>
+                    <li class="breadcrumb-item"><a href="#">Menu</a>
                     </li>
-                    <li class="breadcrumb-item active"><a href="#">Add Restaurant</a>
+                    <li class="breadcrumb-item active"><a href="#">Edit Menu</a>
                     </li>
                 </ol>
             </div>
@@ -66,20 +66,20 @@ Add New Restaurant
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" id="basic-layout-card-center">Add New Restaurant</h4>
+                            <h4 class="card-title" id="basic-layout-card-center">Update Menu Info</h4>
                         </div>
                         <div class="card-content collapse show">
                             <div class="card-body">
-                                <form class="form" method="post" action="{{ route ('restaurant.store') }}" enctype="multipart/form-data">@csrf
+                                <form class="form" method="post" action="{{ route ('menu.update',[$data->id]) }}" enctype="multipart/form-data">@csrf
                                     <div class="form-body">
-                                        @include('admin.setup.restaurant.form')
+                                        @include('admin.setup.menu.form')
                                     </div>
 
                                     <div class="form-actions text-right">
-                                        <a href="{{ route ('restaurant.index')}}" class="btn btn-warning mr-1">
+                                        <a href="{{ route ('menu.index')}}" class="btn btn-warning mr-1">
                                             <i class="feather icon-x"></i> Cancel</a>
                                         <button type="submit" id="submitBtn" class="btn btn-primary">
-                                            <i class="fa fa-check-square-o"></i> Submit
+                                            <i class="fa fa-check-square-o"></i> Update
                                         </button>
                                     </div>
                                 </form>

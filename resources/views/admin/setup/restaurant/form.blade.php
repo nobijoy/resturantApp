@@ -11,8 +11,14 @@
 
     <div class="form-group col-md-6 ">
         <label for="name">Restaurant Name <span class="text-danger">*</span></label>
-        <input type="text" id="name" class="form-control" placeholder="Restaurant Name" name="name"
-        @if($url == 'restaurant.edit')  value="{{$data->name}}" @else value="old('name')" @endif required>
+        <input type="text" id="name" class="form-control item-name" placeholder="Restaurant Name" name="name"
+        @if($url == 'restaurant.edit')  value="{{$data->name}}" @else value="{{old('name')}}" @endif required>
+    </div>
+
+    <div class="form-group col-md-6 ">
+        <label for="slug">Slug<span class="text-danger">*</span></label>
+        <input type="text" id="slug" class="form-control item-name" placeholder="slug" name="slug"
+        @if($url == 'restaurant.edit')  value="{{$data->slug}}" @else value="{{old('slug')}}" @endif required>
     </div>
 
     @if($url == 'restaurant.edit' && $data->cover_img)
@@ -62,7 +68,7 @@
     <div class="form-group col-md-6 ">
         <label for="short_note">Short Note</label>
         <input type="text" id="short_note" class="form-control" placeholder="" name="short_note"
-        @if($url == 'restaurant.edit')  value="{{$data->short_note}}" @else value="old('short_note')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->short_note}}" @else value="{{old('short_note')}}" @endif>
     </div>
 
 
@@ -88,7 +94,7 @@
     <div class="form-group col-md-6 ">
         <label for="address">Address</label>
         <input type="text" id="address" class="form-control" placeholder="address" name="address"
-        @if($url == 'restaurant.edit')  value="{{$data->address}}" @else value="old('address')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->address}}" @else value="{{old('address')}}" @endif>
     </div>
 
     <div class="form-group col-md-6 ">
@@ -100,24 +106,24 @@
     <div class="form-group col-md-6 ">
         <label for="email">Email</label>
         <input type="email" id="email" class="form-control" placeholder="" name="email"
-        @if($url == 'restaurant.edit')  value="{{$data->email}}" @else value="old('email')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->email}}" @else value="{{old('email')}}" @endif>
     </div>
 
     <div class="form-group col-md-6 ">
         <label for="contact_number">Contact Number</label>
         <input type="text" id="contact_number" class="form-control" placeholder="" name="contact_number"
-        @if($url == 'restaurant.edit')  value="{{$data->contact_number}}" @else value="old('contact_number')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->contact_number}}" @else value="{{old('contact_number')}}" @endif>
     </div>
 
     <div class="form-group col-md-6 ">
         <label for="lunch_time">Lunch Time</label>
         <input type="text" id="lunch_time" class="form-control" placeholder="" name="lunch_time"
-        @if($url == 'restaurant.edit')  value="{{$data->lunch_time}}" @else value="old('lunch_time')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->lunch_time}}" @else value="{{old('lunch_time')}}" @endif>
     </div>
 
     <div class="form-group col-md-6 ">
         <label for="dinner_time">Dinner Time</label>
         <input type="text" id="dinner_time" class="form-control" placeholder="" name="dinner_time"
-        @if($url == 'restaurant.edit')  value="{{$data->dinner_time}}" @else value="old('dinner_time')" @endif>
+        @if($url == 'restaurant.edit')  value="{{$data->dinner_time}}" @else value="{{old('dinner_time')}}" @endif>
     </div>
 </div>

@@ -52,6 +52,7 @@ class RestaurantController extends Controller
             $data = new Restaurant();
             $data->area_id = $request->area_id;
             $data->name = $request->name;
+            $data->slug = $request->slug;
             $data->short_note = $request->short_note;
             $data->address = $request->address;
             $data->map = $request->map;
@@ -63,7 +64,7 @@ class RestaurantController extends Controller
             if($request->file('cover_img')){
                 $image = $request->file('cover_img');
                 $input = time() . 'cover_img.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('uploads/images');
+                $destinationPath = public_path('uploads/image');
                 $img = Image::make($image->getRealPath());
                 $img->orientate();
                 $img->resize(1920, 1080)->save($destinationPath.'/'.$input);
@@ -233,11 +234,85 @@ class RestaurantController extends Controller
 
     public function facility(Request $request, $id){
         if ($request->isMethod('post')) {
+            DB::beginTransaction();
+            try {
+                $data = new Facility();
+                $data->restaurant_id = $id;
+                if($request->file('icon')){
+                    $image = $request->file('icon');
+                    $input = time() . 'icon.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('uploads/image');
+                    $img = Image::make($image->getRealPath());
+                    $img->orientate();
+                    $img->resize(50, 50)->save($destinationPath.'/'.$input);
+                    $destinationPath = public_path('/thumbnail');
+                    $image->move($destinationPath,$input);
+                    $data->icon = $input;
+                    $tmpImg = public_path('thumbnail/'.$input);
+                    if (file_exists($tmpImg)) {
+                        unlink($tmpImg);
+                    }
+                }
+                $data->title = $request->title;
+                $data->save();
+                DB::commit();
+                return back()->with('success', 'Facility Added Successfully!');
+            } catch (Throwable $th) {
+                DB::rollback();
+                return back()->with('error', $th->getMessage());
+            }
         }
         $data = Restaurant::findorFail($id);
-        $datas = [];
-        return view('admin.setup.restaurant.facility', compact('data', 'datas'));
+        $sl = 0;
+        $datas = Facility::where('restaurant_id', $id)->get()->reverse();
+        return view('admin.setup.restaurant.facility', compact('data', 'datas', 'sl'));
     }
+
+    
+    public function updaterestaurantFacility(Request $request){
+        DB::beginTransaction();
+        try {
+            $data = Facility::findorFail($request->id);
+            if($request->file('icon')){
+                $image = $request->file('icon');
+                $input = time() . 'icon.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('uploads/image');
+                $img = Image::make($image->getRealPath());
+                $img->orientate();
+                $img->resize(50, 50)->save($destinationPath.'/'.$input);
+                $destinationPath = public_path('/thumbnail');
+                $image->move($destinationPath,$input);
+                $data->icon = $input;
+                $tmpImg = public_path('thumbnail/'.$input);
+                if (file_exists($tmpImg)) {
+                    unlink($tmpImg);
+                }
+            }
+            $data->title = $request->title;
+            $data->save();
+            DB::commit();
+            return back()->with('success', 'Facility Info Updated Successfully!');
+        } catch (Throwable $th) {
+            DB::rollback();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+
+    public function deleterestaurantFacility($id)
+    {
+        DB::beginTransaction();
+        try {
+            $data = Facility::findorFail($id);
+            $data->delete();
+            DB::commit();
+            return 'Facility Info Delete Successfully!';
+        } catch (Throwable $th) {
+            DB::rollback();
+            return 'Somethings Went Wrong!';
+        }
+    }
+
 
     public function parking(Request $request, $id){
         if ($request->isMethod('post')) {
@@ -248,10 +323,10 @@ class RestaurantController extends Controller
                 if($request->file('icon')){
                     $image = $request->file('icon');
                     $input = time() . 'icon.' . $image->getClientOriginalExtension();
-                    $destinationPath = public_path('uploads/images');
+                    $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(100, 100)->save($destinationPath . '/' . $input);
+                    $img->resize(50, 50)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->icon = $input;
@@ -275,6 +350,49 @@ class RestaurantController extends Controller
         return view('admin.setup.restaurant.parking', compact('data', 'datas', 'sl'));
     }
 
+    public function updaterestaurantParking(Request $request){
+        DB::beginTransaction();
+        try {
+            $data = Parking::findorFail($request->id);
+            if($request->file('icon')){
+                $image = $request->file('icon');
+                $input = time() . 'icon.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('uploads/image');
+                $img = Image::make($image->getRealPath());
+                $img->orientate();
+                $img->resize(50, 50)->save($destinationPath.'/'.$input);
+                $destinationPath = public_path('/thumbnail');
+                $image->move($destinationPath,$input);
+                $data->icon = $input;
+                $tmpImg = public_path('thumbnail/'.$input);
+                if (file_exists($tmpImg)) {
+                    unlink($tmpImg);
+                }
+            }
+            $data->title = $request->title;
+            $data->save();
+            DB::commit();
+            return back()->with('success', 'Parking Info Updated Successfully!');
+        } catch (Throwable $th) {
+            DB::rollback();
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+
+    public function deleterestaurantParking($id)
+    {
+        DB::beginTransaction();
+        try {
+            $data = Parking::findorFail($id);
+            $data->delete();
+            DB::commit();
+            return 'Parking Info Delete Successfully!';
+        } catch (Throwable $th) {
+            DB::rollback();
+            return 'Somethings Went Wrong!';
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -303,6 +421,7 @@ class RestaurantController extends Controller
         try{
             $data->area_id = $request->area_id;
             $data->name = $request->name;
+            $data->slug = $request->slug;
             $data->short_note = $request->short_note;
             $data->address = $request->address;
             $data->map = $request->map;

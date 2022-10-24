@@ -12,4 +12,8 @@ class Restaurant extends Model
     public function area(){
         return $this->belongsTo(Area::class, 'area_id', 'id');
     }
+
+    public function total(){
+        return $this->where('is_active', 1)->count();
+    }
 }

@@ -67,20 +67,20 @@
                         </div>
 
 
-                        <div class="form-group col-md-6 mb-2 mx-auto">
+                        <!-- <div class="form-group col-md-6 mb-2 mx-auto">
                             <label for="top_nav_bg">Header Background Color</label>
                             <input type="color" id="top_nav_bg" class="form-control" name="top_nav_bg" value="{{$data ? $data->top_nav_bg : ''}}">
                         </div>
 
                         <div class="form-group col-md-6 mb-2 mx-auto">
-                            <label for="top_nav_color">Navbar Color</label>
+                            <label for="top_nav_color">Navbar Elements Color</label>
                             <input type="color" id="top_nav_color" class="form-control" placeholder="color" name="top_nav_color" value="{{$data ? $data->top_nav_color : ''}}">
-                        </div>
+                        </div> -->
 
-                        <div class="form-group col-md-6 mb-2 mx-auto">
+                        <!-- <div class="form-group col-md-6 mb-2 mx-auto">
                             <label for="top_nav_scroll_color">Navbar Scroll Color</label>
                             <input type="color" id="top_nav_scroll_color" class="form-control" placeholder="color" name="top_nav_scroll_color" value="{{$data ? $data->top_nav_scroll_color : ''}}">
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group col-md-6 mb-2 mx-auto">

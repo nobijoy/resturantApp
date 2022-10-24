@@ -25,10 +25,70 @@ class ContactpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1920, 1020)->save($destinationPath.'/'.$input);
+                    $img->resize(1920, 548)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->cover_img = $input;
+                    $tmpImg = public_path('thumbnail/'.$input);
+                    if (file_exists($tmpImg)) {
+                        unlink($tmpImg);
+                    }
+                }
+                if($request->file('location_img')){
+                    $image = $request->file('location_img');
+                    $input = time() . 'location_img.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('uploads/image');
+                    $img = Image::make($image->getRealPath());
+                    $img->orientate();
+                    $img->resize(1000, 548)->save($destinationPath.'/'.$input);
+                    $destinationPath = public_path('/thumbnail');
+                    $image->move($destinationPath,$input);
+                    $data->location_img = $input;
+                    $tmpImg = public_path('thumbnail/'.$input);
+                    if (file_exists($tmpImg)) {
+                        unlink($tmpImg);
+                    }
+                }
+                if($request->file('cancel_booking_img')){
+                    $image = $request->file('cancel_booking_img');
+                    $input = time() . 'cancel_booking_img.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('uploads/image');
+                    $img = Image::make($image->getRealPath());
+                    $img->orientate();
+                    $img->resize(1000, 548)->save($destinationPath.'/'.$input);
+                    $destinationPath = public_path('/thumbnail');
+                    $image->move($destinationPath,$input);
+                    $data->cancel_booking_img = $input;
+                    $tmpImg = public_path('thumbnail/'.$input);
+                    if (file_exists($tmpImg)) {
+                        unlink($tmpImg);
+                    }
+                }
+                if($request->file('feedback_img')){
+                    $image = $request->file('feedback_img');
+                    $input = time() . 'feedback_img.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('uploads/image');
+                    $img = Image::make($image->getRealPath());
+                    $img->orientate();
+                    $img->resize(1000, 548)->save($destinationPath.'/'.$input);
+                    $destinationPath = public_path('/thumbnail');
+                    $image->move($destinationPath,$input);
+                    $data->feedback_img = $input;
+                    $tmpImg = public_path('thumbnail/'.$input);
+                    if (file_exists($tmpImg)) {
+                        unlink($tmpImg);
+                    }
+                }
+                if($request->file('career_img')){
+                    $image = $request->file('career_img');
+                    $input = time() . 'career_img.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('uploads/image');
+                    $img = Image::make($image->getRealPath());
+                    $img->orientate();
+                    $img->resize(1000, 548)->save($destinationPath.'/'.$input);
+                    $destinationPath = public_path('/thumbnail');
+                    $image->move($destinationPath,$input);
+                    $data->career_img = $input;
                     $tmpImg = public_path('thumbnail/'.$input);
                     if (file_exists($tmpImg)) {
                         unlink($tmpImg);

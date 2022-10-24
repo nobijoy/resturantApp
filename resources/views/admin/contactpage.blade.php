@@ -57,6 +57,50 @@
                             <input type="text" id="short_note" class="form-control" name="short_note" value="{{$data ? $data->short_note : ''}}">
                         </div>
 
+                        @if($data && $data->location_img)
+                            <div class="col-6 mb-2 mx-auto">
+                                <img src="{{ asset('uploads/image/'.$data->location_img)}}" class="img-box">
+                            </div>
+                        @endif
+
+                        <div class="form-group col-6 mb-2 mx-auto">
+                            <label for="location_img">Our Locations Cover Image (Image Size Should Be 1920 x 1080): </label>
+                            <input type="file" name="location_img" id="location_img" class="form-control">
+                        </div>
+
+                        @if($data && $data->cancel_booking_img)
+                            <div class="col-6 mb-2 mx-auto">
+                                <img src="{{ asset('uploads/image/'.$data->cancel_booking_img)}}" class="img-box">
+                            </div>
+                        @endif
+
+                        <div class="form-group col-6 mb-2 mx-auto">
+                            <label for="cancel_booking_img">Cancel Booking Cover Image (Image Size Should Be 1920 x 1080): </label>
+                            <input type="file" name="cancel_booking_img" id="cancel_booking_img" class="form-control">
+                        </div>
+
+                        @if($data && $data->feedback_img)
+                            <div class="col-6 mb-2 mx-auto">
+                                <img src="{{ asset('uploads/image/'.$data->feedback_img)}}" class="img-box">
+                            </div>
+                        @endif
+
+                        <div class="form-group col-6 mb-2 mx-auto">
+                            <label for="feedback_img">Feedback Cover Image (Image Size Should Be 1920 x 1080): </label>
+                            <input type="file" name="feedback_img" id="feedback_img" class="form-control">
+                        </div>
+
+                        @if($data && $data->career_img)
+                            <div class="col-6 mb-2 mx-auto">
+                                <img src="{{ asset('uploads/image/'.$data->career_img)}}" class="img-box">
+                            </div>
+                        @endif
+
+                        <div class="form-group col-6 mb-2 mx-auto">
+                            <label for="career_img">Career Cover Image (Image Size Should Be 1920 x 1080): </label>
+                            <input type="file" name="career_img" id="career_img" class="form-control">
+                        </div>
+
                         <div class="form-group col-md-6 mb-2 mx-auto">
                             <label for="address">Address</label>
                             <input type="text" id="address" class="form-control" name="address" value="{{$data ? $data->address : ''}}">

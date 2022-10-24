@@ -47,3 +47,30 @@ function deleteData(url) {
         }
     });
 }
+
+function getSubCatAgainstCat(id, url, view) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {
+            "id": id,
+        },
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (data) {
+            if (data.length > 0) {
+                var output = '<option value="">Select Sub Category</option>';
+                $.each(data, function (index, value) {
+                    output += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                });
+            } else {
+                var output = '<option value="">No Sub Category Found</option>';
+            }
+            $(view).html(output);
+        },
+
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}

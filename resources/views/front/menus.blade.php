@@ -1,541 +1,97 @@
 @extends('master.front.master')
 @section('title')
-    Booking
-    @endsection
+Menus
+@endsection
 
-    @section('body')
-
-
+@section('body')
 
 
-          <div class="banner ">
-            <img src="img/menu-hero.jpg" class="d-block w-100 img-fluid" alt="...">
-          </div>
+
+
+<div class="banner ">
+    <img src="img/menu-hero.jpg" class="d-block w-100 img-fluid" alt="...">
+</div>
 
 <!-- Body Section -->
+@if (sizeof($menuCats) > 0)
+<section class="menu py-md-5 my-md-5">
+    <div class="container">
+        <h1 class="text-center head-col fs-1 my-3">Main Menu</h1>
+        <div class="text-center mt-md-5">
+            <ul class="nav nav-pills mb-3 text-center justify-content-center d-flex" id="pills-tab" role="tablist">
+                @foreach ($menuCats as $ckey=>$cat)
+                    <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
+                        <button @if($cat->id == 2) class="nav-link btn-menu active" @else class="nav-link btn-menu" @endif id="tab_{{$cat->id}}-tab" data-bs-toggle="pill"
+                            data-bs-target="#tab_{{$cat->id}}" type="button" role="tab" aria-controls="{{$cat->id}}"
+                            aria-selected="true">
+                            <p class="no-mb fw-semibold"><i @if($ckey == 0) class="fa-solid fa-cookie-bite" @elseif ($ckey == 1) class="fa-solid fa-bowl-rice" 
+                            @elseif ($ckey == 2) class="fa-solid fa-cheese" @elseif ($ckey == 3) class="fa-solid fa-wine-glass-empty" 
+                            @elseif ($ckey == 4) class="fa-solid fa-burger" @else class="fa-solid fa-cookie-bite" @endif></i>{{$cat->name}}</p>
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
 
-    <section class="menu py-md-5 my-md-5">
-        <div class="container">
-          <h1 class="text-center head-col fs-1 my-3">Main Menu</h1>
-            <div class="text-center mt-md-5">
-              <ul class="nav nav-pills mb-3 text-center justify-content-center d-flex" id="pills-tab" role="tablist">
-                <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
-                  <button class="nav-link btn-menu active" id="pills-starter-tab" data-bs-toggle="pill" data-bs-target="#pills-starter" type="button" role="tab" aria-controls="pills-starter" aria-selected="true">
-                    <p class="no-mb fw-semibold"><i class="fa-solid fa-cookie-bite"></i> STARTERS</p>
-                  </button>
-                </li>
-                <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
-                  <button class="nav-link btn-menu" id="pills-main-tab" data-bs-toggle="pill" data-bs-target="#pills-main" type="button" role="tab" aria-controls="pills-main" aria-selected="false">
-                    <p class="no-mb fw-semibold"><i class="fa-solid fa-bowl-rice"></i> MAINS</p>
-                  </button>
-                </li>
-                <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
-                  <button class="nav-link btn-menu" id="pills-dessert-tab" data-bs-toggle="pill" data-bs-target="#pills-dessert" type="button" role="tab" aria-controls="pills-dessert" aria-selected="false">
-                    <p class="no-mb fw-semibold"><i class="fa-solid fa-cheese"></i> DESSERTS</p>
-                  </button>
-                </li>
-                <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
-                  <button class="nav-link btn-menu" id="pills-drink-tab" data-bs-toggle="pill" data-bs-target="#pills-drink" type="button" role="tab" aria-controls="pills-drink" aria-selected="false">
-                    <p class="no-mb fw-semibold"><i class="fa-solid fa-wine-glass-empty"></i> DRINKS</p>
-                  </button>
-                </li>
-                <li class="nav-item mx-sm-auto my-sm-2" role="presentation">
-                  <button class="nav-link btn-menu" id="pills-kids-tab" data-bs-toggle="pill" data-bs-target="#pills-kids" type="button" role="tab" aria-controls="pills-kids" aria-selected="false">
-                    <p class="no-mb fw-semibold"><i class="fa-solid fa-burger"></i> KIDS</p>
-                  </button>
-                </li>
-              </ul>
-
-              <div class="tab-content py-md-5 mx-auto" id="pills-tabContent">
-                <div class="tab-pane fade active show" id="pills-starter" role="tabpanel" aria-labelledby="pills-starter-tab">
-                  <div class="row text-grey justify-content-center">
-                    <div class="col-md-5 bg-container m-md-2 py-3">
-                      <h1 class="py-2">Grill</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a class="menu-item newsweetalert" id=""><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
+            <div class="tab-content py-md-5 mx-auto" id="pills-tabContent">
+                @foreach ($menuCats as $ckey => $cat)
+                    <div @if($cat->id == 2) class="tab-pane fade active show" @else class="tab-pane fade" @endif id="tab_{{$cat->id}}" role="tabpanel"
+                        aria-labelledby="pills-starter-tab">
+                        <div class="row text-grey justify-content-center">
+                            @foreach ($menuSubCats->where('menu_category_id', $cat->id) as $skey => $subCat)
+                                <div class="col-md-5 bg-container m-md-2 py-3">
+                                    <h1 class="py-2">{{$subCat->name}}</h1>
+                                    <p class="py-2">{{$subCat->short_note}}</p>
+                                    @foreach ($menus->where('menu_sub_category_id', $subCat->id) as $mkey => $menu)
+                                        <div class="row menu-item m-md-2" data-name="{{$menu->name}}" data-description="{{$menu->description}}" data-image="{{asset('uploads/image/'.$menu->image)}}">
+                                            <div class="col-3">
+                                                @if ($menu->image)
+                                                    <img src="{{asset('uploads/image/'.$menu->image)}}" alt="" width="120px" height="80px">
+                                                @endif
+                                            </div>
+                                            <div class="col-7 text-start">
+                                                <p><a href="javascript:void(0)" class="newsweetalert text-dark" ><u>{{$menu->name}}</u></a></p>
+                                            </div>
+                                            <div class="col-2 ps-1">
+                                                <h5 class="fw-semibold">£{{$menu->price}}</h5>
+                                            </div>
+                                            <div class="col-12 text-start">
+                                                <p class="font-12">{{$menu->description}}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
                     </div>
-                    <div class="col-md-5 bg-container m-md-3 my-3">
-                      <h1 class="py-2">CLASSIC PIZZAS</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
+                @endforeach
+            </div>
+</section>
+@endif
+@endsection
 
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row m-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2 ps-1">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-
-                <div class="tab-pane fade" id="pills-main" role="tabpanel" aria-labelledby="pills-main-tab">
-                  <div class="row text-grey justify-content-center">
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">Grill</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">Grill</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-dessert" role="tabpanel" aria-labelledby="pills-dessert-tab">
-                  <div class="row text-grey justify-content-center">
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">DESSERTS</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">DESSERTS</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-drink" role="tabpanel" aria-labelledby="pills-drink-tab">
-                  <div class="row text-grey justify-content-center">
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">SOFT DRINKS</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">HOT DRINKS</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-kids" role="tabpanel" aria-labelledby="pills-kids-tab">
-                  <div class="row text-grey justify-content-center">
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">BURGER</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-5 bg-container m-md-3">
-                      <h1 class="py-2">SANDWICH</h1>
-                      <p class="py-2">With fries or mixed salad (sweet potato fries + £1)</p>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                      <div class="row p-md-2">
-                        <div class="col-10 text-start">
-                        <a  class="menu-item"><p>CLASSIC CHEESEBURGER</p></a>
-
-                        <p>beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun</p>
-                        </div>
-                        <div class="col-2">
-                          <h5 class="fw-semibold">£1.90</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-    </section>
-
-
-
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".menu-item").click(function(){
-            Swal.fire({
-                title: 'CLASSIC CHEESEBURGER',
-                text: 'beef patty, Monterey Jack cheese, burger sauce, lettuce, tomato in a brioche bun',
-                imageUrl: '/img/modal-img1.jpg',
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".menu-item").click(function () {
+                var name = $(this).data('name');
+                var img = $(this).data('image');
+                var image = '#';
+                if (img != '') {
+                    image = img;
+                }
+                var description = $(this).data('description');
+                Swal.fire({
+                    title: name,
+                    text: description,
+                    imageUrl: image,
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                })
             })
         })
-    })
-</script>
-
-
-
-    @endsection
+    </script>
+@endsection

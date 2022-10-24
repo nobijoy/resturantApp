@@ -67,7 +67,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">Add Lunch Menu</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">Add Parking Info</h4>
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
@@ -107,14 +107,14 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h2 class="card-title">Menu List</h2>
+                                <h2 class="card-title">Parking Info List</h2>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered action_table">
                                         <thead>
                                         <tr>
                                             <th>Sl</th>
-                                            <th>Item</th>
-                                            <th>Price</th>
+                                            <th>Icon</th>
+                                            <th>Title</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -122,12 +122,12 @@
                                         @if (sizeof ($datas) > 0)
                                             @foreach($datas as $item)
                                                 <tr>
-                                                    <th>{{++$sl}}</th>
-                                                    <td>{{$item->icon}}</td>
+                                                    <td>{{++$sl}}</td>
+                                                    <td><img src="{{ asset('uploads/image/'.$item->icon)}}" width="50px" height="50px" alt=""></td>
                                                     <td>{{$item->title}}</td>
                                                     <td>
-                                                        <a data-toggle="modal"data-target="#editItem" data-target-id="{{$item->id}}"
-                                                           data-item="{{$item->icon}}" data-price="{{$item->title}}" >
+                                                        <a data-toggle="modal"data-target="#editParking" data-target-id="{{$item->id}}"
+                                                           data-title="{{$item->title}}">
                                                             <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                 <i class="fa fa-pencil-square"></i></button>
                                                         </a>
@@ -149,7 +149,7 @@
                 </div>
             </section>
             <!-- Start Add Modal -->
-            <div class="modal fade text-left" id="editItem" tabindex="-1" role="dialog"
+            <div class="modal fade text-left" id="editParking" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel35" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -164,12 +164,12 @@
                             <div class="modal-body">
                                 <input type="hidden" name="id" id="id">
                                 <fieldset class="form-group floating-label-form-group">
-                                    <label for="eitem">Item Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="item" class="form-control" id="eitem" placeholder="Item Name" required>
+                                    <label for="eicon">Change Icon</label>
+                                    <input type="file" name="icon" class="form-control" id="eicon">
                                 </fieldset>
                                 <fieldset class="form-group floating-label-form-group">
-                                    <label for="eprice">Item Price<span class="text-danger">*</span></label>
-                                    <input type="number" name="price" class="form-control" id="eprice" placeholder="Item Price" required>
+                                    <label for="etitle">Title<span class="text-danger">*</span></label>
+                                    <input type="text" name="title" class="form-control" id="etitle" placeholder="Title" required>
                                 </fieldset>
                             </div>
                             <div class="modal-footer">
@@ -187,18 +187,16 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $("#editItem").on("show.bs.modal", function (e) {
+        $("#editParking").on("show.bs.modal", function (e) {
             var id = $(e.relatedTarget).data('target-id');
-            var item = $(e.relatedTarget).data('item');
-            var price = $(e.relatedTarget).data('price');
+            var title = $(e.relatedTarget).data('title');
 
             $('.modal-body #id').val(id);
-            $('.modal-body #eitem').val(item);
-            $('.modal-body #eprice').val(price);
+            $('.modal-body #etitle').val(title);
 
         });
 
-        $("#editItem").on("hide.bs.modal", function (e) {
+        $("#editParking").on("hide.bs.modal", function (e) {
             location.reload();
         });
     </script>

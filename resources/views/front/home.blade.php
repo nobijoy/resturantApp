@@ -20,20 +20,33 @@
                     aria-label="Slide 4"></button>
 
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/bg.jpg" class="d-block w-100 img-fluid" alt="...">
+        @if ($home->carousel)
+            @php
+                $allCarsel = explode(',', $home->carousel);
+            @endphp
+            <div class="carousel-inner">
+                @foreach($allCarsel as $key=>$carsel)
+                    <div @if($key == 0) class="carousel-item active" @else class="carousel-item" @endif>
+                        <img src="{{ asset('uploads/image/'.$carsel)}}" class="d-block w-100 img-fluid" alt="...">
+                    </div>
+                @endforeach
             </div>
-            <div class="carousel-item">
-                <img src="img/bg2.jpg" class="d-block w-100 img-fluid" alt="...">
+        @else
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="img/bg.jpg" class="d-block w-100 img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/bg2.jpg" class="d-block w-100 img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/bg3.jpg" class="d-block w-100 img-fluid" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/bg4.jpg" class="img-fluid d-block w-100" alt="...">
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="img/bg3.jpg" class="d-block w-100 img-fluid" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="img/bg4.jpg" class="img-fluid d-block w-100" alt="...">
-            </div>
-        </div>
+        @endif
     </div>
 
 
@@ -64,16 +77,28 @@
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-5 ">
-                <img src="img/uppersection1.jpg" class="d-block w-100 h-100">
+                @if ($home->section_2_img_1)
+                    <img src="{{ asset('uploads/image/'.$home->section_2_img_1)}}" class="d-block w-100 h-100">
+                @else
+                    <img src="img/uppersection1.jpg" class="d-block w-100 h-100">
+                @endif
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <img src="img/uppersection3.jpg" class="d-grid w-100">
+                @if ($home->section_2_img_2)
+                    <img src="{{ asset('uploads/image/'.$home->section_2_img_2)}}" class="d-grid w-100 h-100">
+                @else
+                    <img src="img/uppersection3.jpg" class="d-grid w-100 h-100">
+                @endif
             </div>
             <div class="col-md-1 my-2"></div>
             <div class="col-md-5">
-                <img src="img/uppersection2.jpg" class="d-grid w-100 h-100">
+                @if ($home->section_2_img_3)
+                    <img src="{{ asset('uploads/image/'.$home->section_2_img_3)}}" class="d-grid w-100 h-100">
+                @else
+                    <img src="img/uppersection2.jpg" class="d-grid w-100 h-100">
+                @endif
             </div>
         </div>
     </div>
@@ -85,7 +110,11 @@
         <div class="pb-md-3">
             <div class="row mb-md-3 pb-3">
                 <div class="col-md-8 pe-md-3 pb-3 text-center">
-                    <img src="img/menuSection2.jpg" class="d-grid w-100 h-100">
+                    @if ($home->section_img_3)
+                        <img src="{{ asset('uploads/image/'.$home->section_img_3)}}" class="d-grid w-100 h-100">
+                    @else
+                        <img src="img/menuSection2.jpg" class="d-grid w-100 h-100">
+                    @endif
                     <!-- <button class="btn-rounded mx-auto my-2 fw-semibold btn text-dark">
                         Play
                       </button> -->
@@ -125,7 +154,11 @@
 
                 </div>
                 <div class="col-md-8 ps-md-3 pb-3">
-                    <img src="img/menuSection1.jpg" class="d-grid w-100 h-100">
+                    @if ($home->section_img_4)
+                        <img src="{{ asset('uploads/image/'.$home->section_img_4)}}" class="d-grid w-100 h-100">
+                    @else
+                        <img src="img/menuSection1.jpg" class="d-grid w-100 h-100">
+                    @endif
                 </div>
             </div>
         </div>

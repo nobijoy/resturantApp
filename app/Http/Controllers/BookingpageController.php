@@ -25,7 +25,7 @@ class BookingpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1920, 1080)->save($destinationPath . '/' . $input);
+                    $img->resize(1920, 548)->save($destinationPath . '/' . $input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath, $input);
                     $data->cover_img = $input;

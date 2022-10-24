@@ -69,7 +69,7 @@ class HomepageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(526, 658)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_2_img_1 = $input;
@@ -84,7 +84,7 @@ class HomepageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(636, 416)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_2_img_2 = $input;
@@ -99,7 +99,7 @@ class HomepageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(636, 416)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_2_img_3 = $input;
@@ -114,7 +114,7 @@ class HomepageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1920, 1080)->save($destinationPath.'/'.$input);
+                    $img->resize(1260, 655)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_img_3 = $input;
@@ -129,7 +129,7 @@ class HomepageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1260, 655)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_img_4 = $input;

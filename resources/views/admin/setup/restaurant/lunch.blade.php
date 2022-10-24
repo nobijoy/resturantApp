@@ -122,7 +122,7 @@ Restaurant Lunch Menu
                                         @if (sizeof ($datas) > 0)
                                         @foreach($datas as $item)
                                         <tr>
-                                            <th>{{++$sl}}</th>
+                                            <td>{{++$sl}}</td>
                                             <td>{{$item->item}}</td>
                                             <td>{{$item->price}}</td>
                                             <td>

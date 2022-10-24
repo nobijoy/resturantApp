@@ -5,6 +5,7 @@ $(document).ready(function () {
     ****************************************/
 
     $('.action_table').DataTable();
+    $('#action-table').DataTable();
     // $('.buttons-print,').addClass('btn mb-2');
 
     /**************************************

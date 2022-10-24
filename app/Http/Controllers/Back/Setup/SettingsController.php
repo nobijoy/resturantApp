@@ -28,7 +28,7 @@ class SettingsController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(80, 80)->save($destinationPath.'/'.$input);
+                    $img->resize(275, 80)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->logo = $input;

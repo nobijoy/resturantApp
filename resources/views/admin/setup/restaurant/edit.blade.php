@@ -10,7 +10,7 @@ Edit Restaurant Info
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-1">
             <h3 class="content-header-title">
-                <a href="{{ route ('restaurant.index')}}" class="btn btn-primary">Restaurant  List<i class="fa fa-eye"></i></a>
+                <a href="{{ route ('restaurant.index')}}" class="btn btn-primary">Restaurant List<i class="fa fa-eye"></i></a>
             </h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">

@@ -27,7 +27,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1920, 1080)->save($destinationPath.'/'.$input);
+                    $img->resize(1920, 548)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->cover_img = $input;
@@ -45,7 +45,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1080, 548)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_2_img = $input;
@@ -65,7 +65,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1080, 480)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_3_img = $input;
@@ -83,7 +83,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1080, 480)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_4_img = $input;
@@ -101,7 +101,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1080, 480)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_5_img = $input;
@@ -119,7 +119,7 @@ class AboutpageController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(1080, 720)->save($destinationPath.'/'.$input);
+                    $img->resize(1080, 480)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->section_6_img = $input;
@@ -145,7 +145,7 @@ class AboutpageController extends Controller
             }
         }
         $data = Aboutpage::find(1);
-        return view('admin.aboutpage', compact('data'));
+        return view('admin.about_design_2', compact('data'));
 
     }
 }

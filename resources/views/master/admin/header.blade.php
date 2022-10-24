@@ -8,7 +8,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ route ('dashboard') }}">
                         <img class="brand-logo" alt="no logo availavle" src="{{asset('/backend')}}/images/logo/stack-logo-light.png">
                         <h2 class="brand-text">Restaurant</h2>
                     </a>

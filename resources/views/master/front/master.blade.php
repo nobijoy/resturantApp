@@ -5,16 +5,19 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <title>{{$gsetting->app_title}} | @yield('title')</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('/uploads/image/'.$gsetting->favicon)}}">
     <link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('/css/all.css')}}">
     <link rel="stylesheet" href="{{asset('/css/styles.css')}}">
     <link rel="stylesheet" href="{{asset('/css/menu.css')}}">
+    <link href="{{ asset('assets/css/color.php?primary_color=').str_replace('#','',$gsetting->primary_color) }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/color.php?primary_bg_color=').str_replace('#','',$gsetting->primary_bg_color) }}" rel="stylesheet">
     <style>
         .menu-img1{
             background-image: url("{{ asset('/img/lowerSection1.jpg') }}");
-        /*background-image: url(/img/lowerSection1.jpg) ;*/
-        background-repeat: no-repeat;
+            /*background-image: url(/img/lowerSection1.jpg) ;*/
+            background-repeat: no-repeat;
             background-size: cover;
             height: 60vh;
             width: 100vw;
@@ -26,11 +29,12 @@
 <nav class="navbar fixed-top navbar-dark navbar-expand-lg nav-in px-md-3 py-md-4">
     <div class="container-fluid px-md-5">
         <a class="navbar-brand" href="{{route('home')}}">
-            <h1>WILDWOOD</h1>
-            <h6 class="text-center">PIZZA PASTA GRILL</h6>
+            <img src="{{ asset('uploads/image/'. $gsetting->logo) }}" alt="" class="front-logo">
+            <!-- <h1>WILDWOOD</h1>
+            <h6 class="text-center">PIZZA PASTA GRILL</h6> -->
         </a>
         <button class="navbar-toggler btn-rounded text-white m-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <!-- <span class="navbar-toggler-icon"></span> -->
             <i class="fa fa-bars nav-link round-border bg-nav"></i>
         </button>
@@ -42,7 +46,7 @@
                     <a class="nav-link text-white" href="{{route('menus')}}">MENUS</a>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link text-white" href="{{route('restaurantList')}}">RESTURANT</a>
+                    <a class="nav-link text-white" href="{{route('restaurantList')}}">RESTURANTS</a>
                 </li>
                 <li class="nav-item px-3">
                     <a class="nav-link text-white" href="{{route('about')}}">ABOUT</a>
@@ -51,11 +55,8 @@
                     <a class="nav-link text-white" href="{{route('contact')}}">CONTACT</a>
                 </li>
 
-                <li class="nav-item px-3 bg-nav">
-                    <a class="nav-link text-dark" href="{{route('booking')}}">BOOKING</a>
-                </li>
-                <li class="nav-item pt-1 px-3">
-                    <i class="fa fa-bars nav-link round-border text-white"></i>
+                <li class="nav-item px-3  text-center">
+                    <a class="btn btn-primary bg-nav text-dark" href="{{route('booking')}}">BOOKING</a>
                 </li>
             </ul>
         </div>
@@ -205,12 +206,12 @@
 
 
 
-<script src="{{asset('/')}}js/jquery-3.6.1.min.js"></script>
-<script src="{{asset('/')}}js/bootstrap.js"></script>
-<script src="{{asset('/')}}js/app.js"></script>
+<script src="{{asset('/js/jquery-3.6.1.min.js')}}"></script>
+<script src="{{asset('/js/bootstrap.js')}}"></script>
+<script src="{{asset('/js/app.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.35/sweetalert2.all.min.js"></script>
 
-
+@yield('script')
 </body>
 
 </html>

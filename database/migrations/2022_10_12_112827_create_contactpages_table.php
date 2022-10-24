@@ -16,6 +16,10 @@ class CreateContactpagesTable extends Migration
         Schema::create('contactpages', function (Blueprint $table) {
             $table->id();
             $table->string('cover_img')->nullable();
+            $table->string('location_img')->nullable();
+            $table->string('cancel_booking_img')->nullable();
+            $table->string('feedback_img')->nullable();
+            $table->string('career_img')->nullable();
             $table->string('title')->nullable();
             $table->string('short_note')->nullable();
             $table->string('address')->nullable();
